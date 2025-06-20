@@ -1,0 +1,31 @@
+%YAML 1.1
+---
+
+# Suricata configuration file
+
+vars:
+  address-groups:
+    HOME_NET: "[10.0.0.0/24,192.168.2.0/24]"
+
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: /var/log/suricata/eve.json
+      types:
+        - alert:
+            tagged-packets: yes
+        - http
+        - dns
+        - tls
+        - files
+
+af-packet:
+  - interface: eth0
+    threads: auto
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+
+# … vos autres réglages …
+
